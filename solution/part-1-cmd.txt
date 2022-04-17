@@ -1,0 +1,5 @@
+docker run -it -d --name=csvserver -p 9393:9300/tcp infracloudio/csvserver:latest
+
+docker cp ./inputFile.txt csvserver:/csvserver/inputdata
+
+docker start csvserver
