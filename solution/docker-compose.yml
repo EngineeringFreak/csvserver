@@ -8,4 +8,16 @@ services:
     environment:
       - CSVSERVER_BORDER=Orange
     volumes:
-         - './inputFile.txt:/csvserver/inputdata'
+      - './inputFile.txt:/csvserver/inputdata'
+  prometheus:
+    image: prom/prometheus:v2.22.0
+    ports:
+     - 9090:9090
+    volumes:
+      - ./config:/prometheus
+      - ./data/prometheus:/data
+    command:
+      - '--config.file=./prometheus.yml'
+    depends_on:
+      - csvserver
+    restart: always
